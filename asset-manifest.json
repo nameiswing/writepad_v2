@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/writepad_v2/static/css/main.45de6997.chunk.css",
+    "main.css": "/writepad_v2/static/css/main.3652cd49.chunk.css",
     "main.js": "/writepad_v2/static/js/main.bd829668.chunk.js",
     "main.js.map": "/writepad_v2/static/js/main.bd829668.chunk.js.map",
     "runtime-main.js": "/writepad_v2/static/js/runtime-main.892848da.js",
@@ -8,13 +8,13 @@
     "static/js/2.bea932aa.chunk.js": "/writepad_v2/static/js/2.bea932aa.chunk.js",
     "static/js/2.bea932aa.chunk.js.map": "/writepad_v2/static/js/2.bea932aa.chunk.js.map",
     "index.html": "/writepad_v2/index.html",
-    "static/css/main.45de6997.chunk.css.map": "/writepad_v2/static/css/main.45de6997.chunk.css.map",
+    "static/css/main.3652cd49.chunk.css.map": "/writepad_v2/static/css/main.3652cd49.chunk.css.map",
     "static/js/2.bea932aa.chunk.js.LICENSE.txt": "/writepad_v2/static/js/2.bea932aa.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.892848da.js",
     "static/js/2.bea932aa.chunk.js",
-    "static/css/main.45de6997.chunk.css",
+    "static/css/main.3652cd49.chunk.css",
     "static/js/main.bd829668.chunk.js"
   ]
 }
