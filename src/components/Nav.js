@@ -27,7 +27,7 @@ const Nav = () => {
                 placement="right"
                 title="View List" 
             >
-                <Link to="/">
+                <Link to="/writepad">
                     <IconButton>
                         <SubjectOutlined />
                     </IconButton>

@@ -18,7 +18,7 @@ const NoteList = () => {
 
     useEffect( () => {
         const keysNotNull = localStorage.getItem('keys') !== null;
-        if(!keysNotNull) localStorage.setItem('keys', '[]')
+        if(!keysNotNull) localStorage.setItem('keys', '[]');
         dispatch({ type: 'GRAB_STORAGE'})
         // dispatch({ type: 'UPDATE_EDITED'})
     }, [dispatch])
@@ -28,7 +28,8 @@ const NoteList = () => {
             <FlexContainer grow={1} direction="column">
                 <Header
                     padding={1}
-                    grow={1}
+                    grow={0}
+                    shrink={0}
                     height="4rem"
                     align="center"
                     bgcolor="var(--accent1)"
@@ -46,14 +47,14 @@ const NoteList = () => {
                     </FlexItem>
                 </Header>
                 <Divider />
-                <FlexWrap height="calc(100% - 4rem)" direction="column">
-                    {notes.length > 0 && notes.reverse().map( note => (
+                <NotesWrapper  direction="column-reverse">
+                    {notes.length > 0 && notes.map( note => (
                         <ButtonBase key={ note.id } color={ note.important ? "error" : "" }>
                             <ContentWrap 
                                 width="100%"   
                                 height="3rem" 
                                 align="center"
-                                onClick={ () => editItem(
+                                onDoubleClick={ () => editItem(
                                         note.title,
                                         note.details,
                                         note.date,
@@ -77,7 +78,7 @@ const NoteList = () => {
                             </ContentWrap>
                         </ButtonBase>
                     ))}
-                </FlexWrap>
+                </NotesWrapper>
             </FlexContainer>
         </MainContainer>
     )
@@ -86,6 +87,8 @@ const NoteList = () => {
 export default NoteList
 
 const MainContainer = styled(FlexWrap)`
+    max-height: 100vh;
+
     @media only screen and (max-width: 500px) {
         height: 100vh;
     }
@@ -113,7 +116,6 @@ const ContentWrap = styled(FlexWrap)`
     }
 `
 const FlexChild = styled.div`
-    /* display: flex-box; */
     border-radius: 0.25rem;
     font-size: .875rem;
     overflow: hidden;
@@ -130,5 +132,10 @@ const FlexChild = styled.div`
     &:first-child {
         font-weight: 500;
     }
+`
+const NotesWrapper = styled(FlexWrap)`
+    overflow-y: scroll;
+    scrollbar-width: none;
 
+    &::-webkit-scrollbar { display: none; }
 `
