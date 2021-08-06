@@ -27,7 +27,7 @@ const reducer = ( state, action ) => {
             localStorage.setItem(`${action.id}`, JSON.stringify(note));
             localStorage.setItem( 'currentNote', JSON.stringify(note));
 
-            return { notes: [] }; //needs to clear notes every time to see updates
+            return { notes: [] }; //needs to clear notes every time to see updates when list component reloads
         }
         // break;
 

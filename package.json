@@ -1,5 +1,6 @@
 {
   "name": "writepad_v2",
+  "homepage": "http://nameisWing.github.io/writepad_v2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

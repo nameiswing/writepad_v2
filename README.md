@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## This app is deplyed at https://nameiswing.github.io/writepad_v2/
+
 ## Available Scripts
 
 In the project directory, you can run:

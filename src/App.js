@@ -24,7 +24,7 @@ const App = () => {
                         </Route>
                     </Switch>
                     <Switch>
-                        <Route exact path="/writepad">
+                        <Route exact path="/writepad_v2">
                             <NoteList />
                         </Route>
                     </Switch>
