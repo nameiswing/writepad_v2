@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/writepad_v2/static/css/main.45de6997.chunk.css",
-    "main.js": "/writepad_v2/static/js/main.24aa6e33.chunk.js",
-    "main.js.map": "/writepad_v2/static/js/main.24aa6e33.chunk.js.map",
+    "main.js": "/writepad_v2/static/js/main.bd829668.chunk.js",
+    "main.js.map": "/writepad_v2/static/js/main.bd829668.chunk.js.map",
     "runtime-main.js": "/writepad_v2/static/js/runtime-main.892848da.js",
     "runtime-main.js.map": "/writepad_v2/static/js/runtime-main.892848da.js.map",
-    "static/js/2.82bf0b57.chunk.js": "/writepad_v2/static/js/2.82bf0b57.chunk.js",
-    "static/js/2.82bf0b57.chunk.js.map": "/writepad_v2/static/js/2.82bf0b57.chunk.js.map",
+    "static/js/2.bea932aa.chunk.js": "/writepad_v2/static/js/2.bea932aa.chunk.js",
+    "static/js/2.bea932aa.chunk.js.map": "/writepad_v2/static/js/2.bea932aa.chunk.js.map",
     "index.html": "/writepad_v2/index.html",
     "static/css/main.45de6997.chunk.css.map": "/writepad_v2/static/css/main.45de6997.chunk.css.map",
-    "static/js/2.82bf0b57.chunk.js.LICENSE.txt": "/writepad_v2/static/js/2.82bf0b57.chunk.js.LICENSE.txt"
+    "static/js/2.bea932aa.chunk.js.LICENSE.txt": "/writepad_v2/static/js/2.bea932aa.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.892848da.js",
-    "static/js/2.82bf0b57.chunk.js",
+    "static/js/2.bea932aa.chunk.js",
     "static/css/main.45de6997.chunk.css",
-    "static/js/main.24aa6e33.chunk.js"
+    "static/js/main.bd829668.chunk.js"
   ]
 }
