@@ -20,7 +20,7 @@ const App = () => {
                 <Router>
                     <Nav />
                     <Switch>
-                        <Route exact path="/">
+                        <Route path="/">
                             <Hello />
                         </Route>
                     </Switch>

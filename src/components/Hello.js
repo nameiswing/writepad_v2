@@ -4,7 +4,7 @@ import { FlexWrap } from '../utils/components';
 
 const Hello = () => {
 
-    const [ width, setWidth ] = useState(null);
+    const [ width, setWidth ] = useState(999);
 
     window.addEventListener('resize', () => setWidth(window.innerWidth));
 
