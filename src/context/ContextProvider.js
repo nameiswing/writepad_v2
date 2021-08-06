@@ -19,16 +19,15 @@ const reducer = ( state, action ) => {
 
         case "ADD_NOTE": {
             const keys = JSON.parse(localStorage.getItem('keys'));
-            if(!keys.find(key => key === action.id)) {
+            const found = keys.find(key => key === action.id)
+            if(!found) {
                 localStorage.setItem(
                     'keys', JSON.stringify([...keys, `${action.id}`]));
             }
             localStorage.setItem(`${action.id}`, JSON.stringify(note));
             localStorage.setItem( 'currentNote', JSON.stringify(note));
-            
-            state.notes = [ ...state.notes ]
 
-            return { notes: [ ...state.notes ] }
+            return { notes: [] }; //needs to clear notes every time to see updates
         }
         // break;
 
@@ -38,16 +37,6 @@ const reducer = ( state, action ) => {
                 const newItem = JSON.parse(localStorage.getItem(keyItem));
                 const found = state.notes.find(note => note.id === newItem.id);
                 if( !found ) state.notes = [ ...state.notes, newItem ];
-            })
-            return { notes: [ ...state.notes ] }
-        }
-
-        case "UPDATE_EDITED": {
-            const updatedNote = JSON.parse(localStorage.getItem('currentNote'));
-            state.notes.forEach( item => {
-                if(item.id === updatedNote.id) {
-                    item.important = updatedNote.important;
-                }
             })
             return { notes: [ ...state.notes ] }
         }

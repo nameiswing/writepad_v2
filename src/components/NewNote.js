@@ -31,23 +31,36 @@ const NewNote = () => {
     
 
 
-    function saveNote() {
+    async function saveNote() {
 
         const { timeNow, dateNow } = date();
 
         if(!title || !details) return;
-        dispatch({ 
+        await dispatch({ 
             type: 'ADD_NOTE',
             title, details,
             id: id === '' ? Date.now() : id,
             date: dateNow,
             time: timeNow,
             important
-        })
+        });
+
+        grabCurrentNote();
     };
 
+    function grabCurrentNote() {
+        const currentNote = localStorage.getItem("currentNote")
+        if( currentNote !== undefined || currentNote !== null ) {
+            const parsedNote = JSON.parse(currentNote);
+            if(parsedNote === null) return;
+            setTitle(parsedNote.title);
+            setDetails(parsedNote.details);
+            setId(parsedNote.id);
+            setImportant(parsedNote.important);
+        }
+    }
+
     function newNote() {
-        saveNote()
         setTitle('');
         setDetails('');
         setId('');
@@ -59,15 +72,7 @@ const NewNote = () => {
         const keysNotNull = localStorage.getItem('keys') !== null;
         if(!keysNotNull) localStorage.setItem('keys', '[]')
 
-        const currentNote = localStorage.getItem("currentNote")
-        if( currentNote !== undefined || currentNote !== null ) {
-            const parsedNote = JSON.parse(currentNote);
-            if(parsedNote === null) return;
-            setTitle(parsedNote.title);
-            setDetails(parsedNote.details);
-            setId(parsedNote.id);
-            setImportant(parsedNote.important);
-        }
+        grabCurrentNote();
     }, [])
 
     return (
