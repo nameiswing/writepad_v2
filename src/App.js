@@ -20,17 +20,17 @@ const App = () => {
                 <Router>
                     <Nav />
                     <Switch>
-                        <Route exact path="/">
+                        <Route exact path="/writepad_v2">
                             <Hello />
                         </Route>
                     </Switch>
                     <Switch>
-                        <Route exact path="/new">
+                        <Route exact path="/writepad_v2/new">
                             <NewNote />
                         </Route>
                     </Switch>
                     <Switch>
-                        <Route exact path="/notelist">
+                        <Route exact path="/writepad_v2/notelist">
                             <NoteList />
                         </Route>
                     </Switch>
