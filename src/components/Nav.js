@@ -14,7 +14,7 @@ const Nav = () => {
                 placement="right"
                 title="Add Note" 
             >
-                <Link to="/new">
+                <Link to="/writepad_v2/new">
                     <IconButton id="new-note">
                         <AddBoxOutlined />
                     </IconButton>
@@ -27,7 +27,7 @@ const Nav = () => {
                 placement="right"
                 title="View List" 
             >
-                <Link to="/notelist">
+                <Link to="/writepad_v2/notelist">
                     <IconButton >
                         <SubjectOutlined />
                     </IconButton>
