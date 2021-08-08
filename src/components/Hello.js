@@ -1,17 +1,30 @@
 import styled from 'styled-components';
+import { useContextProvider } from '../context/ContextProvider';
 import { useState } from 'react';
 import { FlexWrap } from '../utils/components';
 
 const Hello = () => {
 
+    const { getTime } = useContextProvider();
+    const { hour } = getTime();
+
     const [ width, setWidth ] = useState(999);
+    const [ greeting ] = useState(greet());
+
+    function greet() {
+        if(hour < 12 && hour > 1) return "Good Morning";
+        if(hour < 18) return "Good Afternoon";
+        if(hour < 23 || hour < 1) return "Good Evening";
+        return "Hello"
+    }
+
 
     window.addEventListener('resize', () => setWidth(window.innerWidth));
 
     return (
         <Container padding={2} grow={1} direction="column" align="center" justifyContent="center">
-            <HelloTag>Good Morning User!</HelloTag>
-            <Instructions>To start, click the "+" button on the top left of the screen.</Instructions>
+            <HelloTag>{ greeting }, User!</HelloTag>
+            <Instructions>To add a note, click the "+" button on the top left corner of your browser.</Instructions>
             <Instructions>To view saved notes, click the "&#8801;" button.</Instructions>
             { width <= 500 &&
             <Instructions>If you can't see the buttons, try resizing your browser window.</Instructions>

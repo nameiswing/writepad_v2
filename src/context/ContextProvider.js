@@ -27,7 +27,7 @@ const reducer = ( state, action ) => {
             localStorage.setItem(`${action.id}`, JSON.stringify(note));
             localStorage.setItem( 'currentNote', JSON.stringify(note));
 
-            return { notes: [] }; //needs to clear notes every time to see updates when list component reloads
+            return { notes: [] }; //needs to clear notes every time to see updates when list NoteList reloads
         }
         // break;
 
@@ -49,11 +49,16 @@ const reducer = ( state, action ) => {
 
 const ContextProvider = ({ children }) => {
 
-    const [ { notes }, dispatch ] = useReducer( reducer, { 
-        notes: []
-    } );
+    function getTime() {
+        const time = new Date();
+        const hour = time.getHours();
+        const minute = time.getMinutes();
+        return { hour, minute }
+    }
 
-    const values = { notes, dispatch };
+    const [ { notes }, dispatch ] = useReducer( reducer, { notes: [] } );
+
+    const values = {  getTime, notes, dispatch, };
 
     return (
         <Context.Provider value={values}>
