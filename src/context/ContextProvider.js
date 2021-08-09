@@ -58,7 +58,11 @@ const ContextProvider = ({ children }) => {
 
     const [ { notes }, dispatch ] = useReducer( reducer, { notes: [] } );
 
-    const values = {  getTime, notes, dispatch, };
+    const values = {  
+        getTime, 
+        notes, 
+        dispatch
+    };
 
     return (
         <Context.Provider value={values}>

@@ -1,12 +1,15 @@
 import { FlexWrap } from "../utils/components";
-import { AddBoxOutlined, SubjectOutlined, HomeOutlined } from "@material-ui/icons";
-import { IconButton, Tooltip } from "@material-ui/core";
+import { AddBoxOutlined, SubjectOutlined, HomeOutlined, FaceRounded } from "@material-ui/icons";
+import { IconButton, Tooltip, Avatar } from "@material-ui/core";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
 const Nav = () => {
     return (
-        <NavWrap direction="column" padding={1} id="nav" shrink={0}>
+        <NavWrap direction="column" padding={1} id="nav" shrink={0} align="center">
+            <Avatar variant="rounded" alt="profile">
+                <FaceRounded />
+            </Avatar>
             <Tooltip
                 arrow
                 enterDelay={200}    

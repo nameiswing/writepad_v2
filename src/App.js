@@ -6,17 +6,21 @@ import { FlexWrap } from "./utils/components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NoteList from "./components/NoteList";
 import Hello from './components/Hello';
+import { Helmet as Head } from 'react-helmet';
 
 const App = () => {
 
     useEffect(() => {
         if(localStorage.keys !== null) return;
         localStorage.setItem("keys", "[]")
-    }, [])
+    })
 
     return (
         <StylesProvider injectFirst>
             <FlexWrap direction="row">
+                <Head>
+                    <title>Writepad - Welcome</title>
+                </Head>
                 <Router>
                     <Nav />
                     <Switch>

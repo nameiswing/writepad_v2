@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { FlexWrap } from "../utils/components";
 import { Button, Divider, IconButton, TextField, Tooltip } from "@material-ui/core";
 import { NoteAddOutlined, ErrorOutline } from "@material-ui/icons";
+import { Helmet as Head } from 'react-helmet';
 
 const NewNote = () => {
 
@@ -76,7 +77,10 @@ const NewNote = () => {
     }, [])
 
     return (
-        <FlexContainer padding={2} grow="1" id="new-note">
+        <FlexContainer padding={1} grow="1" id="new-note">
+            <Head>
+                <title>Writepad - New Note</title>
+            </Head>
             <Form autoComplete="off">
                 <FlexWrap 
                     direction="row" 

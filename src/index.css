@@ -15,7 +15,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Montserrat', 'Arial', sans-serif !important;
+    font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif !important;
 }
 
 html, body {

@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { Divider, ButtonBase } from '@material-ui/core';
 import { FlexItem, FlexWrap } from '../utils/components';
 import { useContextProvider } from '../context/ContextProvider';
+import { Helmet as Head } from 'react-helmet';
+import { HelpOutline } from '@material-ui/icons';
 
 const NoteList = () => {
 
@@ -20,11 +22,13 @@ const NoteList = () => {
         const keysNotNull = localStorage.getItem('keys') !== null;
         if(!keysNotNull) localStorage.setItem('keys', '[]');
         dispatch({ type: 'GRAB_STORAGE'})
-        // dispatch({ type: 'UPDATE_EDITED'})
     }, [dispatch])
 
     return (
-        <MainContainer padding={2} grow={1}>
+        <MainContainer padding={1} grow={1}>
+            <Head>
+                <title>Writepad - Note List</title>
+            </Head>
             <FlexContainer grow={1} direction="column">
                 <Header
                     padding={1}
@@ -47,8 +51,8 @@ const NoteList = () => {
                     </FlexItem>
                 </Header>
                 <Divider />
-                <NotesWrapper  direction="column-reverse">
-                    {notes.length > 0 && notes.map( note => (
+                <NotesWrapper  direction="column">
+                    {notes.length > 0 && notes.reverse().map( note => (
                         <ButtonBase key={ note.id } color={ note.important ? "error" : "" }>
                             <ContentWrap 
                                 width="100%"   
@@ -79,6 +83,11 @@ const NoteList = () => {
                         </ButtonBase>
                     ))}
                 </NotesWrapper>
+                <Divider />
+                <Footer padding={2} align="center">
+                    <HelpOutline color="secondary" fontSize="small" />&nbsp;
+                    <FlexWrap>Double click a note to edit.</FlexWrap>
+                </Footer>
             </FlexContainer>
         </MainContainer>
     )
@@ -135,7 +144,13 @@ const FlexChild = styled.div`
 `
 const NotesWrapper = styled(FlexWrap)`
     overflow-y: scroll;
+    height: calc(100% - 7rem);
     scrollbar-width: none;
 
     &::-webkit-scrollbar { display: none; }
+`
+const Footer = styled(FlexWrap)`
+    font-size: .875rem;
+    color: var(--text3);
+    justify-self: end;
 `

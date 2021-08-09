@@ -14,7 +14,7 @@ const Hello = () => {
     function greet() {
         if(hour < 12 && hour > 1) return "Good Morning";
         if(hour < 18) return "Good Afternoon";
-        if(hour < 23 || hour < 1) return "Good Evening";
+        if(hour < 24 || hour < 1) return "Good Evening";
         return "Hello"
     }
 
@@ -46,14 +46,14 @@ const HelloTag = styled(FlexWrap)`
     background-color: var(--accent1);
     border-radius: .5rem;
     color: var(--text3);
-    font-size: 2rem;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 500;
     margin-bottom: 1.5rem;
     padding: 1rem 2rem;
-    `
+`
 const Instructions = styled.div`
     color: var(--text3);
-    font-size: .875rem; 
-    text-align: center;
+    font-size: clamp(.875rem, 2vw, 1rem); 
     line-height: 2rem;
+    text-align: center;
 `
