@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
     return (
-        <NavWrap direction="column" padding={1} id="nav" shrink={0} align="center">
+        <NavWrap direction="column" id="nav" shrink={0} grow={0} align="center">
             <Avatar variant="rounded" alt="profile">
                 <FaceRounded />
             </Avatar>
@@ -57,9 +57,8 @@ export default Nav
 
 const NavWrap = styled(FlexWrap)`
     height: calc(100vh);
-    position: relative;
     box-shadow: 0 0 .375rem rgba(0, 0, 0, 0.3);
-    width: max-content;
+    padding: .75rem .5rem;
 
     @media only screen and ( max-width: 500px ) {
         display: none ;

@@ -1,23 +1,55 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
-import { Divider, ButtonBase } from '@material-ui/core';
+import { useEffect, useState } from 'react';
+import { Divider, Popover } from '@material-ui/core';
 import { FlexItem, FlexWrap } from '../utils/components';
 import { useContextProvider } from '../context/ContextProvider';
 import { Helmet as Head } from 'react-helmet';
 import { HelpOutline } from '@material-ui/icons';
+import DeleteAlert from './DeleteAlert';
 
 const NoteList = () => {
 
     const { notes, dispatch } = useContextProvider();
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const [ { posX, posY }, setPosition ] = useState({ posX: 0, posY: 0 });
+    const [ deleteAlert, setDeleteAlert ] = useState(false);
+    const [ itemToDelete, setItemToDelete ] = useState(null);
 
+    const [currentNote, setCurrentNote] = useState({ 
+        title:'', details:'', date:'', id:'', important:'' 
+    })
+    
 
-    function editItem(title, details, date, id, important) {
-        const item = { title, details, date, id, important };
-        const newNoteButton = document.getElementById('new-note');
-        localStorage.setItem('currentNote', JSON.stringify(item));
-        newNoteButton.click();
+    function openPopover(e) {
+        setPosition({ posX: e.clientX, posY: e.clientY })
+        e.preventDefault();
+        e.stopPropagation();
+        setAnchorEl(e.target);
     }
-
+    function closePopover() {
+        setAnchorEl(null)
+    }
+    
+    function openDeleteDialog() {
+        setDeleteAlert(true)
+        closePopover();
+    }
+    function closeDeleteDialog(e) {
+        e.stopPropagation();
+        setDeleteAlert(false);
+    }
+    
+    
+    async function editItem() {
+        localStorage.removeItem('currentNote');
+        localStorage.setItem('currentNote', JSON.stringify(currentNote))
+        setTimeout(() => {
+            const newNoteButtonBase = document.getElementById('new-note');
+            newNoteButtonBase.click();
+        }, 100)
+    }
+    
     useEffect( () => {
         const keysNotNull = localStorage.getItem('keys') !== null;
         if(!keysNotNull) localStorage.setItem('keys', '[]');
@@ -51,42 +83,73 @@ const NoteList = () => {
                     </FlexItem>
                 </Header>
                 <Divider />
-                <NotesWrapper  direction="column">
-                    {notes.length > 0 && notes.reverse().map( note => (
-                        <ButtonBase key={ note.id } color={ note.important ? "error" : "" }>
-                            <ContentWrap 
-                                width="100%"   
-                                height="3rem" 
-                                align="center"
-                                onDoubleClick={ () => editItem(
-                                        note.title,
-                                        note.details,
-                                        note.date,
-                                        note.id,
-                                        note.important,
-                                    )}
+                <NotesWrapper id="note-item" direction="column-reverse">
+                    {notes.length > 0 && notes.map( note => (
+                        <ContentWrap 
+                            key={ note.id }
+                            width="100%"   
+                            height="3rem" 
+                            align="center"
+                            onContextMenu={ (e)=>{
+                                openPopover(e);
+                                setItemToDelete(note.id);
+                                setCurrentNote({
+                                    title: note.title,
+                                    details: note.details,
+                                    date: note.date,
+                                    id: note.id,
+                                    important: note.important,
+                                })    
+                            }}
+                        >
+                            <FlexChild 
+                                width="25%" 
+                                color="var(--text1)" 
+                                bgcolor={ note.important ? "#ffcdd2" : "#b2ebf2" }
                             >
-                                <FlexChild 
-                                    width="25%" 
-                                    color="var(--text1)" 
-                                    bgcolor={ note.important ? "#ffcdd2" : "#b2ebf2" }
-                                >
-                                    { note.title }
-                                </FlexChild>
-                                <FlexChild width="55%" color="var(--text2)">
-                                    { note.details }
-                                </FlexChild>
-                                <FlexChild width="20%" color="var(--text4)" title={note.time}>
-                                    { note.date }
-                                </FlexChild>
-                            </ContentWrap>
-                        </ButtonBase>
+                                { note.title }
+                            </FlexChild>
+                            <FlexChild width="55%" color="var(--text2)">
+                                { note.details }
+                            </FlexChild>
+                            <FlexChild width="20%" color="var(--text4)" title={note.time}>
+                                { note.date }
+                            </FlexChild>
+
+                        </ContentWrap>
                     ))}
                 </NotesWrapper>
+                <Popover
+                    open={open}
+                    onClose={closePopover}
+                    anchorReference="anchorPosition"
+                    anchorPosition={{ top: posY, left: posX }}
+                >
+                    <FlexWrap direction="column">
+                        <ContextOption 
+                            padding={1.1}
+                            onClick={ () => editItem()}
+                        >
+                            Edit
+                        </ContextOption>
+                        <Divider />
+                        <ContextOption 
+                            padding={1.1}
+                            onClick={openDeleteDialog}
+                        >
+                            Delete
+                        </ContextOption>
+                    </FlexWrap>
+                </Popover>
+                <DeleteAlert 
+                    open={deleteAlert}
+                    handleClose={closeDeleteDialog}
+                    itemToDelete={itemToDelete}
+                />
                 <Divider />
                 <Footer padding={2} align="center">
                     <HelpOutline color="secondary" fontSize="small" />&nbsp;
-                    <FlexWrap>Double click a note to edit.</FlexWrap>
+                    <FlexWrap>Right click on a note to see options.</FlexWrap>
                 </Footer>
             </FlexContainer>
         </MainContainer>
@@ -126,13 +189,13 @@ const ContentWrap = styled(FlexWrap)`
 `
 const FlexChild = styled.div`
     border-radius: 0.25rem;
-    font-size: .875rem;
+    font-size: clamp(.75rem, 2vw, .875rem);
     overflow: hidden;
     padding: 0.375rem .5rem;
     margin: .5rem;
     text-overflow: ellipsis;
     align-items: center;
-    /* text-align: center; */
+    text-align: center;
     white-space: nowrap;
     width: ${ props => props.width };
     background-color: ${ props => props.bgcolor};
@@ -146,8 +209,19 @@ const NotesWrapper = styled(FlexWrap)`
     overflow-y: scroll;
     height: calc(100% - 7rem);
     scrollbar-width: none;
+    justify-content: start;
 
     &::-webkit-scrollbar { display: none; }
+`
+const ContextOption = styled(FlexWrap)`
+    font-size: .75rem;
+    justify-content: center;
+    cursor: pointer;
+    /* margin: .25rem; */
+
+    &:hover { 
+        background-color: var(--text3);
+    }
 `
 const Footer = styled(FlexWrap)`
     font-size: .875rem;

@@ -18,6 +18,9 @@ export const FlexWrap = styled.div`
             case 1: {
                 return ".5rem;"
             }
+            case 1.1: {
+                return ".5rem 1rem;"
+            }
             case 2: {
                 return "1rem;"
             }
@@ -27,7 +30,7 @@ export const FlexWrap = styled.div`
             default: {
                 return "0;"
             }
-        }
+    }
     }};
 `
 export const FlexItem = styled(FlexWrap)`
